@@ -1,4 +1,6 @@
-﻿namespace CalculatorApp.Tests
+﻿//using CalculatorApp.Logic;
+
+namespace CalculatorApp.Tests
 {
     [TestClass]
     public sealed class Test1

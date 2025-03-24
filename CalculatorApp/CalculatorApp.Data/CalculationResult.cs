@@ -2,12 +2,12 @@
 {
     public class CalculationResult
     {
-        public int FirstNumber { get; set; }
-        public int SecondNumber { get; set; }
-        public int Result {  get; set; }
+        public double FirstNumber { get; set; }
+        public double SecondNumber { get; set; }
+        public double Result {  get; set; }
         public string Operation {  get; set; }
 
-        public CalculationResult (int firstNumber, int secondNumber, int result, string operation)
+        public CalculationResult (double firstNumber, double secondNumber, double result, string operation)
         {
             FirstNumber = firstNumber;
             SecondNumber = secondNumber;
