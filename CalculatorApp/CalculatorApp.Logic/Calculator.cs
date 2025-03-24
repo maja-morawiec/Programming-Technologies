@@ -21,7 +21,7 @@ namespace CalculatorApp.Logic
 
         public CalculationResult Divide(double a, double b)
         {
-            if (b == 0) throw new DivideByZeroException("Nie można dzielić przez zero!");
+            if (b == 0) throw new DivideByZeroException("You cannot divide by zero!");
             return new CalculationResult(a, b, a / b, "Division");
         }
     }
