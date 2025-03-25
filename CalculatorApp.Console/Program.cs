@@ -1,6 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
-
-using CalculatorApp.Data;
+﻿using CalculatorApp.Data;
 using CalculatorApp.Logic;
 using System;
 
@@ -30,11 +28,14 @@ class Program
                 _ => throw new InvalidOperationException("That's forbidden!")
             };
 
-            Console.WriteLine($"Wynik: {result.Result}");
+            Console.WriteLine($"Result: {result.Result}");
         }
         catch (Exception ex)
         {
             Console.WriteLine($"Error: {ex.Message}");
         }
+
+        Console.WriteLine("Press any key to exit...");
+        Console.ReadKey();
     }
 }
