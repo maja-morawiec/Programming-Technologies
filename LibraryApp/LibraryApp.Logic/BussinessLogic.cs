@@ -14,17 +14,17 @@ namespace LibraryApp.Logic
 
         public void AddUser(int  id, string name)
         {
-            _data.Users.Add(new User { Id = id, Name = name });
+            _data.Users.Add(new Reader { Id = id, Name = name });
         }
 
         public void AddProduct(int id, string name, int quantity)
         {
-            _data.Catalog[id] = new Product { Id = id, Name = name, Quantity = quantity };
+            _data.Catalog[id] = new Book { Id = id, Name = name, Quantity = quantity };
         }
 
         public void RecordEvent(string description)
         {
-            _data.Events.Add(new Event
+            _data.Events.Add(new BorrowEvent
             {
                 Id = _data.Events.Count + 1,
                 Description = description,

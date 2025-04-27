@@ -1,7 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using LibraryApp.Data;
+﻿using LibraryApp.Data;
 using LibraryApp.Logic;
-using System;
 
 namespace LibraryApp.Tests
 {

@@ -11,15 +11,15 @@ namespace LibraryApp.Data
        
         public void SeedUsers()
         {
-            Users.Add(new User { Id = 1, Name = "Anna" });
-            Users.Add(new User { Id = 2, Name = "Tom" });
+            Users.Add(new Reader { Id = 1, Name = "Anna" });
+            Users.Add(new Reader { Id = 2, Name = "Tom" });
         }
 
         
         public void SeedCatalog()
         {
-            Catalog[1] = new Product { Id = 1, Name = "Book", Quantity = 5 };
-            Catalog[2] = new Product { Id = 2, Name = "Pen", Quantity = 10 };
+            Catalog[1] = new Book { Id = 1, Name = "Book", Quantity = 5 };
+            Catalog[2] = new Book { Id = 2, Name = "Pen", Quantity = 10 };
         }
     }
 }
