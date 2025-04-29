@@ -2,7 +2,7 @@
 
 namespace LibraryApp.Data
 {
-    public abstract class Event //tu?
+    public abstract class Event
     {
         public int Id { get; set; }
         public string Description { get; set; }

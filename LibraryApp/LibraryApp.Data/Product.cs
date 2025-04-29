@@ -1,6 +1,6 @@
 ﻿namespace LibraryApp.Data
 {
-    public abstract class Product //tu?
+    public abstract class Product
     {
         public int Id { get; set; }
         public string Name { get; set; }

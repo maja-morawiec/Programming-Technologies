@@ -2,7 +2,7 @@
 
 namespace LibraryApp.Data
 {
-    public interface IDataLayer //czy tu tez abstract??
+    public interface IDataLayer
     {
         List<User> Users { get; }
         Dictionary<int, Product> Catalog { get; }
