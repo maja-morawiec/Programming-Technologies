@@ -9,17 +9,6 @@ namespace LibraryApp.Data
         public List<Event> Events { get; } = new List<Event>();
 
        
-        public void SeedUsers()
-        {
-            Users.Add(new Reader { Id = 1, Name = "Anna" });
-            Users.Add(new Reader { Id = 2, Name = "Tom" });
-        }
-
         
-        public void SeedCatalog()
-        {
-            Catalog[1] = new Book { Id = 1, Name = "Book", Quantity = 5 };
-            Catalog[2] = new Book { Id = 2, Name = "Pen", Quantity = 10 };
-        }
     }
 }

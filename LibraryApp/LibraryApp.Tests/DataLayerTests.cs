@@ -7,10 +7,11 @@ namespace LibraryApp.Tests
     public class DataLayerTests
     {
         [TestMethod]
-        public void SeedUsers_ShouldAddTwoUsers()
+        public void ManualUserAdd_ShouldAddTwoUsers()
         {
             var dataLayer = new DataLayer();
-            dataLayer.SeedUsers();
+            dataLayer.Users.Add(new Reader { Id = 1, Name = "Anna" });
+            dataLayer.Users.Add(new Reader { Id = 2, Name = "Tom" });
 
             Assert.AreEqual(2, dataLayer.Users.Count);
             Assert.AreEqual("Anna", dataLayer.Users[0].Name);
@@ -18,16 +19,16 @@ namespace LibraryApp.Tests
         }
 
         [TestMethod]
-        public void SeedCatalog_ShouldAddTwoProducts()
+        public void ManualCatalogAdd_ShouldAddTwoProducts()
         {
             var dataLayer = new DataLayer();
-            dataLayer.SeedCatalog();
+            dataLayer.Catalog[1] = new Book { Id = 1, Name = "Book", Quantity = 5 };
+            dataLayer.Catalog[2] = new Book { Id = 2, Name = "Pen", Quantity = 10 };
 
             Assert.AreEqual(2, dataLayer.Catalog.Count);
-            Assert.IsTrue(dataLayer.Catalog.ContainsKey(1));
-            Assert.IsTrue(dataLayer.Catalog.ContainsKey(2));
             Assert.AreEqual("Book", dataLayer.Catalog[1].Name);
             Assert.AreEqual("Pen", dataLayer.Catalog[2].Name);
         }
+
     }
 }
