@@ -2,7 +2,7 @@
 
 namespace LibraryApp.Data
 {
-    public class DataLayer : IDataLayer
+    internal class DataLayer : IDataLayer
     {
         public List<User> Users { get; } = new List<User>();
         public Dictionary<int, Product> Catalog { get; } = new Dictionary<int, Product>();

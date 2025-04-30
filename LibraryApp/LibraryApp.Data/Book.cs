@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LibraryApp.Data
 {
-    public class Book : Product
+    internal class Book : Product
     {
     }
 }

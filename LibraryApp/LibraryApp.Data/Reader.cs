@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LibraryApp.Data
 {
-    public class Reader : User
+    internal class Reader : User
     {
     }
 }
