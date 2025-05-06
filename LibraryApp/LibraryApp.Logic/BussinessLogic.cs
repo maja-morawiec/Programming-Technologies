@@ -1,56 +1,44 @@
 ﻿using System;
-using LibraryApp.Data;
+using LibraryApp.Data.API;
+using LibraryApp.Data.Implementation;
+
 
 namespace LibraryApp.Logic
 {
-    public class BussinessLogic
+    public class BusinessLogic
     {
         private readonly IDataLayer _data;
+        private readonly IDataGenerator _factory;
 
-        public BussinessLogic(IDataLayer dataLayer)
+        public BusinessLogic(IDataLayer data, IDataGenerator factory)
         {
-            _data = dataLayer;
+            _data = data;
+            _factory = factory;
         }
 
-        public void AddUser(int  id, string name)
+        public void AddUser(int id, string name)
         {
-            _data.Users.Add(new Reader { Id = id, Name = name });
+            var user = _factory.CreateUser(id, name);
+            _data.Users.Add(user);
         }
 
         public void AddProduct(int id, string name, int quantity)
         {
-            _data.Catalog[id] = new Book { Id = id, Name = name, Quantity = quantity };
-        }
-
-        public void RecordEvent(string description)
-        {
-            _data.Events.Add(new BorrowEvent
-            {
-                Id = _data.Events.Count + 1,
-                Description = description,
-                Timestamp = DateTime.Now
-            });
+            var product = _factory.CreateProduct(id, name, quantity);
+            _data.Catalog[id] = product;
         }
 
         public void BorrowProduct(int productId)
         {
-            if (_data.Catalog.ContainsKey(productId) && _data.Catalog[productId].Quantity > 0)
+            if (_data.Catalog.TryGetValue(productId, out var product) && product.Quantity > 0)
             {
-                _data.Catalog[productId].Quantity--;
-                RecordEvent($"Product ID {productId} borrowed.");
+                product.Quantity--;
+                var evt = _factory.CreateBorrowEvent(_data.Events.Count + 1, $"Product ID {productId} borrowed.");
+                _data.Events.Add(evt);
             }
             else
             {
                 throw new InvalidOperationException("Product unavailable.");
-            }
-        }
-
-        public void ReturnProduct(int productId)
-        {
-            if (_data.Catalog.ContainsKey(productId))
-            {
-                _data.Catalog[productId].Quantity++;
-                RecordEvent($"Product ID {productId} returned.");
             }
         }
     }

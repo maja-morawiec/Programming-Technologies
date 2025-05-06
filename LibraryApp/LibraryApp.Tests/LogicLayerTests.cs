@@ -1,71 +1,63 @@
-﻿using LibraryApp.Data;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using LibraryApp.Data.API;
+using LibraryApp.Data.Implementation;
 using LibraryApp.Logic;
+using System;
 
 namespace LibraryApp.Tests
 {
     [TestClass]
-    public class BusinessLogicTests
+    public class LogicLayerTests
     {
-        private DataLayer _dataLayer;
-        private BussinessLogic _logic;
+        private IDataLayer _dataLayer;
+        private IDataGenerator _factory;
+        private BusinessLogic _logic;
 
         [TestInitialize]
         public void Setup()
         {
             _dataLayer = new DataLayer();
-            _logic = new BussinessLogic(_dataLayer);
+            _factory = new DataGenerator();
+            _logic = new BusinessLogic(_dataLayer, _factory);
         }
 
         [TestMethod]
-        public void AddUser_ShouldAddUserToList()
+        public void AddUser_ShouldAddUserToDataLayer()
         {
-            _logic.AddUser(1, "Alice");
+            _logic.AddUser(1, "Tom");
 
             Assert.AreEqual(1, _dataLayer.Users.Count);
-            Assert.AreEqual("Alice", _dataLayer.Users[0].Name);
+            Assert.AreEqual("Tom", _dataLayer.Users[0].Name);
         }
 
         [TestMethod]
         public void AddProduct_ShouldAddProductToCatalog()
         {
-            _logic.AddProduct(10, "Book", 3);
+            _logic.AddProduct(5, "Notebook", 3);
 
-            Assert.IsTrue(_dataLayer.Catalog.ContainsKey(10));
-            Assert.AreEqual("Book", _dataLayer.Catalog[10].Name);
-            Assert.AreEqual(3, _dataLayer.Catalog[10].Quantity);
+            Assert.IsTrue(_dataLayer.Catalog.ContainsKey(5));
+            Assert.AreEqual("Notebook", _dataLayer.Catalog[5].Name);
+            Assert.AreEqual(3, _dataLayer.Catalog[5].Quantity);
         }
 
         [TestMethod]
         public void BorrowProduct_ShouldDecreaseQuantityAndAddEvent()
         {
-            _logic.AddProduct(20, "Pen", 5);
+            _logic.AddProduct(2, "Pen", 2);
+            _logic.BorrowProduct(2);
 
-            _logic.BorrowProduct(20);
-
-            Assert.AreEqual(4, _dataLayer.Catalog[20].Quantity);
+            Assert.AreEqual(1, _dataLayer.Catalog[2].Quantity);
             Assert.AreEqual(1, _dataLayer.Events.Count);
             Assert.IsTrue(_dataLayer.Events[0].Description.Contains("borrowed"));
         }
 
         [TestMethod]
-        public void BorrowProduct_WhenUnavailable_ShouldThrowException()
+        public void BorrowProduct_WhenUnavailable_ShouldThrow()
         {
             Assert.ThrowsException<InvalidOperationException>(() =>
             {
                 _logic.BorrowProduct(99);
             });
-        }
-
-        [TestMethod]
-        public void ReturnProduct_ShouldIncreaseQuantityAndAddEvent()
-        {
-            _logic.AddProduct(30, "Notebook", 1);
-
-            _logic.ReturnProduct(30);
-
-            Assert.AreEqual(2, _dataLayer.Catalog[30].Quantity);
-            Assert.AreEqual(1, _dataLayer.Events.Count);
-            Assert.IsTrue(_dataLayer.Events[0].Description.Contains("returned"));
         }
     }
 }

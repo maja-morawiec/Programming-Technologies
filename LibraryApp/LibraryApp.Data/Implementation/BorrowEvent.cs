@@ -1,8 +1,9 @@
 ﻿using System;
+using LibraryApp.Data.API;
 
-namespace LibraryApp.Data
+namespace LibraryApp.Data.Implementation
 {
-    public abstract class Event
+    internal class BorrowEvent : IEvent
     {
         public int Id { get; set; }
         public string Description { get; set; }
