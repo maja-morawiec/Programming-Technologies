@@ -1,20 +1,18 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
-  
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3A5D5469-F602-463B-A28C-D5385921CF15}</ProjectGuid>
+    <ProjectGuid>{F8363713-CECB-45A9-AE9D-1D4A9DD304DC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>LibraryApp.Presentation</RootNamespace>
     <AssemblyName>LibraryApp.Presentation</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion> <!-- Zmienione na .NET Framework 4.8 -->
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
-
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
@@ -24,7 +22,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
@@ -33,7 +30,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -44,19 +40,15 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
   </ItemGroup>
-
   <ItemGroup>
-    <Compile Include="BussinessLogic.cs" />
-    <Compile Include="IBusinessLogic.cs" />
+    <Compile Include="LibraryViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\LibraryApp.Logic\LibraryApp.Logic.csproj">
-      <Project>{ed98f5d1-9b1e-4d5c-988f-cb3cb80c9b4a}</Project>
-      <Name>LibraryApp.Data.Sql</Name>
+      <Project>{3a5d5469-f602-463b-a28c-d5385921cf15}</Project>
+      <Name>LibraryApp.Logic</Name>
     </ProjectReference>
   </ItemGroup>
-
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

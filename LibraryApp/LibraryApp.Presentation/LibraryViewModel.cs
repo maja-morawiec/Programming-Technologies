@@ -1,16 +1,16 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
-using LibraryApp.Data.API;
-using LibraryApp.Logic;
 using System.Windows.Input;
-using System.Collections.Generic;
+using LibraryApp.Logic;  // Użyj Logiki, a nie Data
 
 namespace LibraryApp.Presentation
 {
     public class LibraryViewModel : INotifyPropertyChanged
     {
-        private readonly BusinessLogic _logic;
+        private readonly IBusinessLogic _logic;
 
         public ObservableCollection<IUser> Users { get; set; } = new();
         public ObservableCollection<IProduct> Catalog { get; set; } = new();
@@ -33,14 +33,16 @@ namespace LibraryApp.Presentation
         public ICommand AddBookCommand { get; }
         public ICommand BorrowBookCommand { get; }
 
-        public LibraryViewModel(BusinessLogic logic)
+        // Przekazywanie BusinessLogic w konstruktorze
+        public LibraryViewModel(IBusinessLogic logic)
         {
             _logic = logic;
 
-            // Initial load
-            Users = new ObservableCollection<IUser>(_logic.GetUsers());
-            Catalog = new ObservableCollection<IProduct>(_logic.GetProducts());
+            // Początkowe załadowanie użytkowników i katalogu
+            Users = new ObservableCollection<IUser>(_logic.GetAllUsers());
+            Catalog = new ObservableCollection<IProduct>(_logic.GetAllProducts());
 
+            // Komendy
             AddUserCommand = new RelayCommand(_ => AddUser());
             AddBookCommand = new RelayCommand(_ => AddBook());
             BorrowBookCommand = new RelayCommand(_ => BorrowBook());
@@ -50,14 +52,14 @@ namespace LibraryApp.Presentation
         {
             int id = Users.Count + 1;
             _logic.AddUser(id, $"User {id}");
-            Users.Add(_logic.GetUsers().Last());
+            Users.Add(_logic.GetAllUsers().Last());
         }
 
         private void AddBook()
         {
             int id = Catalog.Count + 1;
             _logic.AddProduct(id, $"Book {id}", 1);
-            Catalog.Add(_logic.GetProducts().Last());
+            Catalog.Add(_logic.GetAllProducts().Last());
         }
 
         private void BorrowBook()
@@ -65,15 +67,17 @@ namespace LibraryApp.Presentation
             if (SelectedProduct != null)
             {
                 _logic.BorrowProduct(SelectedProduct.Id);
-                OnPropertyChanged(nameof(Catalog));
+                OnPropertyChanged(nameof(Catalog));  // Odswieżenie katalogu
             }
         }
 
+        // Powiadamianie o zmianach w UI
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string name = null)
             => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }
 
+    // Prosty RelayCommand, jeśli go nie masz
     public class RelayCommand : ICommand
     {
         private readonly Action<object> _execute;
