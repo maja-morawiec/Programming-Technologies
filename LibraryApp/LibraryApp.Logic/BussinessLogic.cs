@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using LibraryApp.Data.API;
 using LibraryApp.Data.Implementation;
 
@@ -41,5 +43,12 @@ namespace LibraryApp.Logic
                 throw new InvalidOperationException("Product unavailable.");
             }
         }
+
+        public List<IUser> GetUsers() => _data.Users;
+
+        public List<IProduct> GetProducts() => _data.Catalog.Values.ToList();
+
+        public List<IEvent> GetEvents() => _data.Events;
+
     }
 }
