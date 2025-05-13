@@ -17,8 +17,7 @@ namespace LibraryApp.Tests
         public void Setup()
         {
             _dataLayer = new DataLayer();
-            _factory = new DataGenerator();
-            _logic = new BusinessLogic(_dataLayer, _factory);
+            _logic = new BusinessLogic(_dataLayer);
         }
 
         [TestMethod]
