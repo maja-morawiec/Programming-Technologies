@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3A5D5469-F602-463B-A28C-D5385921CF15}</ProjectGuid>
+    <ProjectGuid>{ED98F5D1-9B1E-4D5C-988F-CB3CB80C9B4A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LibraryApp.Logic</RootNamespace>
-    <AssemblyName>LibraryApp.Logic</AssemblyName>
+    <RootNamespace>LibraryApp.Data.Sql</RootNamespace>
+    <AssemblyName>LibraryApp.Data.Sql</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -33,6 +33,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,14 +42,38 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BussinessLogic.cs" />
+    <Compile Include="LibraryData.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LibraryData.dbml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="SqlDataLayer.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LibraryApp.Data.Sql\LibraryApp.Data.Sql.csproj">
-      <Project>{ed98f5d1-9b1e-4d5c-988f-cb3cb80c9b4a}</Project>
-      <Name>LibraryApp.Data.Sql</Name>
-    </ProjectReference>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="LibraryData.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>LibraryData.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="LibraryData.dbml.layout">
+      <DependentUpon>LibraryData.dbml</DependentUpon>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\LibraryApp.Data\LibraryApp.Data.csproj">
       <Project>{2bef8555-93c9-44fc-993f-ac9f8784575f}</Project>
       <Name>LibraryApp.Data</Name>
