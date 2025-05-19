@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using LibraryApp.Data.API;
 using LibraryApp.Data.Implementation;
+using LibraryApp.Logic.DTO;
 
 namespace LibraryApp.Logic
 {
@@ -15,17 +16,21 @@ namespace LibraryApp.Logic
             _data = data;
         }
 
-        public IEnumerable<IUser> GetAllUsers() => _data.Users;
+        // --- USERS ---
 
-        public void AddUser(int id, string name)
+        public IEnumerable<IUserDTO> GetAllUsers() =>
+            _data.Users.Select(u => new UserDTO { Id = u.Id, Name = u.Name });
+
+        public void AddUser(IUserDTO userDto)
         {
-            var user = new Reader { Id = id, Name = name };
+            var user = new Data.Implementation.Reader { Id = userDto.Id, Name = userDto.Name };
             _data.AddUser(user);
             _data.SaveChanges();
         }
 
-        public void UpdateUser(IUser user)
+        public void UpdateUser(IUserDTO userDto)
         {
+            var user = new Data.Implementation.Reader { Id = userDto.Id, Name = userDto.Name };
             _data.UpdateUser(user);
             _data.SaveChanges();
         }
@@ -36,17 +41,31 @@ namespace LibraryApp.Logic
             _data.SaveChanges();
         }
 
-        public IEnumerable<IProduct> GetAllProducts() => _data.Catalog.Values;
+        // --- PRODUCTS ---
 
-        public void AddProduct(int id, string name, int quantity)
+        public IEnumerable<IProductDTO> GetAllProducts() =>
+            _data.Catalog.Values.Select(p => new ProductDTO { Id = p.Id, Name = p.Name, Quantity = p.Quantity });
+
+        public void AddProduct(IProductDTO productDto)
         {
-            var product = new Book { Id = id, Name = name, Quantity = quantity };
+            var product = new Data.Implementation.Book
+            {
+                Id = productDto.Id,
+                Name = productDto.Name,
+                Quantity = productDto.Quantity
+            };
             _data.AddProduct(product);
             _data.SaveChanges();
         }
 
-        public void UpdateProduct(IProduct product)
+        public void UpdateProduct(IProductDTO productDto)
         {
+            var product = new Data.Implementation.Book
+            {
+                Id = productDto.Id,
+                Name = productDto.Name,
+                Quantity = productDto.Quantity
+            };
             _data.UpdateProduct(product);
             _data.SaveChanges();
         }
@@ -57,18 +76,37 @@ namespace LibraryApp.Logic
             _data.SaveChanges();
         }
 
-        public IEnumerable<IEvent> GetAllEvents() => _data.Events;
+        // --- EVENTS ---
 
-        public void AddEvent(int id, string description, DateTime timestamp)
+        public IEnumerable<IEventDTO> GetAllEvents() =>
+            _data.Events.Select(e => new EventDTO
+            {
+                Id = e.Id,
+                Description = e.Description,
+                Timestamp = e.Timestamp
+            });
+
+        public void AddEvent(IEventDTO eventDto)
         {
-            var evt = new BorrowEvent { Id = id, Description = description, Timestamp = timestamp };
-            _data.AddEvent(evt);
+            var ev = new Data.Implementation.BorrowEvent
+            {
+                Id = eventDto.Id,
+                Description = eventDto.Description,
+                Timestamp = eventDto.Timestamp
+            };
+            _data.AddEvent(ev);
             _data.SaveChanges();
         }
 
-        public void UpdateEvent(IEvent evt)
+        public void UpdateEvent(IEventDTO eventDto)
         {
-            _data.UpdateEvent(evt);
+            var ev = new Data.Implementation.BorrowEvent
+            {
+                Id = eventDto.Id,
+                Description = eventDto.Description,
+                Timestamp = eventDto.Timestamp
+            };
+            _data.UpdateEvent(ev);
             _data.SaveChanges();
         }
 
@@ -78,25 +116,26 @@ namespace LibraryApp.Logic
             _data.SaveChanges();
         }
 
+        // --- BORROW PRODUCT ---
+
         public void BorrowProduct(int productId)
         {
-            IProduct product = null;
-            if (_data.Catalog.ContainsKey(productId))
-                product = _data.Catalog[productId];
-
-            if (product == null || product.Quantity <= 0)
+            if (!_data.Catalog.TryGetValue(productId, out var product) || product.Quantity <= 0)
+            {
                 throw new InvalidOperationException("Product unavailable");
+            }
 
             product.Quantity -= 1;
 
-            var evt = new BorrowEvent
+            var borrowEvent = new Data.Implementation.BorrowEvent
             {
                 Id = _data.Events.Count + 1,
                 Description = $"Product {product.Name} borrowed",
                 Timestamp = DateTime.Now
             };
 
-            _data.AddEvent(evt);
+            _data.UpdateProduct(product);
+            _data.AddEvent(borrowEvent);
             _data.SaveChanges();
         }
     }

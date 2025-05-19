@@ -55,12 +55,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\EventDto.cs" />
+    <Compile Include="Model\LibraryModel.cs" />
+    <Compile Include="Model\ProductDto.cs" />
+    <Compile Include="Model\UserDto.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\ProductModel.cs" />
     <Compile Include="ViewModels\ProductsViewModel.cs" />
     <Compile Include="ViewModels\RelayCommand.cs" />
     <Compile Include="ViewModels\UserModel.cs" />
-    <Compile Include="ViewModels\UsersViewModel.cs" />
+    <Compile Include="ViewModels\UserViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

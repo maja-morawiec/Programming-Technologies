@@ -8,7 +8,7 @@ using System.Windows.Input;
 
 namespace LibraryApp.PresentationL.ViewModels
 {
-    class UsersViewModel : BaseViewModel
+    class UserViewModel : BaseViewModel
     {
         private UserModel _selectedUser;
         public ObservableCollection<UserModel> Users { get; set; }
@@ -30,7 +30,7 @@ namespace LibraryApp.PresentationL.ViewModels
 
         public ICommand SaveUserCommand { get; }
 
-        public UsersViewModel()
+        public UserViewModel()
         {
             Users = new ObservableCollection<UserModel>
             {

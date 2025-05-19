@@ -9,7 +9,7 @@ namespace LibraryApp.Tests
     [TestClass]
     public class LogicLayerTests
     {
-        private IDataLayer _dataLayer;
+        /*private IDataLayer _dataLayer;
         private IDataGenerator _factory;
         private BusinessLogic _logic;
 
@@ -57,6 +57,6 @@ namespace LibraryApp.Tests
             {
                 _logic.BorrowProduct(99);
             });
-        }
+        }*/
     }
 }

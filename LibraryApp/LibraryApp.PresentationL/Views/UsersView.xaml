@@ -6,7 +6,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d">
     <UserControl.DataContext>
-        <vm:UsersViewModel />
+        <vm:UserViewModel />
     </UserControl.DataContext>
 
     <Grid Margin="10">

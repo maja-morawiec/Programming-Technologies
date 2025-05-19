@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LibraryApp.PresentationL.ViewModels
+namespace LibraryApp.PresentationL.ViewModels //ten chyba do wywalenia
 {
     class UserModel : INotifyPropertyChanged
     {
