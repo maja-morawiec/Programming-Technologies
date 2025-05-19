@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryApp.Data.Sql", "Libr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryApp.Tests", "LibraryApp.Tests\LibraryApp.Tests.csproj", "{CBC2ACF0-42A0-4FCE-8D09-CBF1DB10319E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryApp.Presentation", "LibraryApp.Presentation\LibraryApp.Presentation.csproj", "{AD077371-FFC5-4316-BD58-E6BFFBBEF528}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryApp.PresentationL", "LibraryApp.PresentationL\LibraryApp.PresentationL.csproj", "{F762B73E-B8A9-45F9-B3C0-220FA837F700}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +35,10 @@ Global
 		{CBC2ACF0-42A0-4FCE-8D09-CBF1DB10319E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CBC2ACF0-42A0-4FCE-8D09-CBF1DB10319E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CBC2ACF0-42A0-4FCE-8D09-CBF1DB10319E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AD077371-FFC5-4316-BD58-E6BFFBBEF528}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AD077371-FFC5-4316-BD58-E6BFFBBEF528}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AD077371-FFC5-4316-BD58-E6BFFBBEF528}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AD077371-FFC5-4316-BD58-E6BFFBBEF528}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F762B73E-B8A9-45F9-B3C0-220FA837F700}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F762B73E-B8A9-45F9-B3C0-220FA837F700}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F762B73E-B8A9-45F9-B3C0-220FA837F700}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F762B73E-B8A9-45F9-B3C0-220FA837F700}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
