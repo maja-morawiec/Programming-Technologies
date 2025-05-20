@@ -9,9 +9,8 @@ namespace LibraryApp.PresentationL.Model.API
     public interface IProductDto
     {
         int Id { get; set; }
-        string Title { get; set; }
-        string Author { get; set; }
-        int Year { get; set; }
+        string Name { get; set; }
+        int Quantity { get; set; }
     }
 }
 

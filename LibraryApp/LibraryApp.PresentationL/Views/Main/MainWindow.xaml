@@ -1,0 +1,67 @@
+﻿<Window x:Class="LibraryApp.PresentationL.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LibraryApp.PresentationL" 
+        xmlns:views="clr-namespace:LibraryApp.PresentationL.Views"
+        xmlns:vmodel="clr-namespace:LibraryApp.PresentationL.ViewModels"
+        xmlns:productVM="crl-namespace:LibraryApp.PresentationL.ViewModel">
+    <Window.DataContext>
+        <vmodel:MainViewModel/>
+    </Window.DataContext>
+    <!--<Window.Resources>
+        <DataTemplate DataType="{x:Type productVM:VMProductList}">
+            <local:ProductMaster />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vmodel:VMUserList}">
+            <local:UserMaster />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vmodel:VMEventList}">
+            <local:EventMaster />
+        </DataTemplate>
+    </Window.Resources>-->
+    <DockPanel Margin="10">
+        <!-- Header -->
+        <Border DockPanel.Dock="Top" Background="#2C3E50" Padding="15" CornerRadius="8" Margin="0,0,0,10">
+            <TextBlock Foreground="White" FontSize="20" FontWeight="Bold" Text="Welcome to our Grocery Shop!" />
+        </Border>
+
+        <!-- Navigation Buttons -->
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,10">
+            <Button Content="Users"
+            Command="{Binding UpdateViewCommand}"
+            CommandParameter="UList"
+            Margin="0,0,10,0"
+            Padding="10,5"
+            Background="#3498DB"
+            Foreground="White"
+            BorderThickness="0"/>
+
+            <Button Content="Products"
+            Command="{Binding UpdateViewCommand}"
+            CommandParameter="CList"
+            Margin="0,0,10,0"
+            Padding="10,5"
+            Background="#3498DB"
+            Foreground="White"
+            BorderThickness="0"/>
+
+            <Button Content="Events"
+            Command="{Binding UpdateViewCommand}"
+            CommandParameter="EList"
+            Margin="0,0,10,0"
+            Padding="10,5"
+            Background="#3498DB"
+            Foreground="White"
+            BorderThickness="0"/>
+
+            
+        </StackPanel>
+
+        <!-- Main Content -->
+        <Border Background="White" CornerRadius="8" Padding="10" BorderBrush="#DDD" BorderThickness="1">
+            <ContentControl Content="{Binding SelectedViewModel}"/>
+        </Border>
+    </DockPanel>
+</Window>

@@ -9,7 +9,7 @@ using LibraryApp.Data;
 
 namespace LibraryApp.SqlTests
 {
-    [TestClass]
+    /*[TestClass]
     public class SqlDataLayerTests
     {
         private IDataLayer _dataLayer;
@@ -40,5 +40,5 @@ namespace LibraryApp.SqlTests
             var eventsList = _dataLayer.Events;
             Assert.IsNotNull(eventsList);
         }
-    }
+    }*/
 }

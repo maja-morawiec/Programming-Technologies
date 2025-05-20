@@ -11,5 +11,11 @@ namespace LibraryApp.Logic.DTO
         public int Id { get; set; }
         public string Description { get; set; }
         public DateTime Timestamp { get; set; }
+        public EventDTO(int id, string description, DateTime timestamp)
+        {
+            this.Id = id;
+            this.Description = description;
+            this.Timestamp = timestamp;
+        }
     }
 }

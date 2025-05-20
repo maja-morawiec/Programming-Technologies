@@ -8,7 +8,7 @@ namespace LibraryApp.Logic.DTO
 {
     public interface IUserDTO
     {
-        int Id { get; }
-        string Name { get; }
+        int Id { get; set; }
+        string Name { get; set; }
     }
 }

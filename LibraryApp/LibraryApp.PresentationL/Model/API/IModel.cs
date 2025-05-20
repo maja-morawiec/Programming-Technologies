@@ -1,43 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
-using LibraryApp.Data.API;
 using LibraryApp.Logic.DTO;
+using LibraryApp.PresentationL.Model.Implementation;
 
-namespace LibraryApp.Logic
+namespace LibraryApp.PresentationL.Model.API
 {
-    public abstract class IBusinessLogic
+    public abstract class IModel
     {
-        // ----------- Users ------------
+        public abstract List<IUserDto> GetAllUsers();
         public abstract Task AddUser(int id, string name);
         public abstract Task UpdateUser(int id, string name);
         public abstract Task RemoveUser(int userId);
-        public abstract List<IUserDTO> GetAllUsers();
 
-        // ----------- Products ----------
+        public abstract List<IProductDto> GetAllProducts();
         public abstract Task AddProduct(int id, string name, int quantity);
         public abstract Task UpdateProduct(int id, string name, int quantity);
         public abstract Task RemoveProduct(int productId);
-        public abstract List<IProductDTO> GetAllProducts();
 
-        // ------------ Events -----------
+        public abstract List<IEventDto> GetAllEvents();
         public abstract Task AddEvent(int id, string description, DateTime timestamp);
         public abstract Task UpdateEvent(int id, string description, DateTime timestamp);
         public abstract Task RemoveEvent(int eventId);
-        public abstract List<IEventDTO> GetAllEvents();
 
-        // ---------- Business Logic ----------
         public abstract Task BorrowProduct(int productId);
 
-        // ----------- Factory --------------
-        public static IBusinessLogic CreateNewService(IDataLayer layer)
+        public static IModel CreateNewModel()
         {
-            return new BusinessLogic(layer);
-        }
-
-        public static IBusinessLogic CreateNewService()
-        {
-            return new BusinessLogic();
+            return new ModelDefault();
         }
     }
 }

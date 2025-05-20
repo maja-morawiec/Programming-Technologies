@@ -10,5 +10,10 @@ namespace LibraryApp.Logic.DTO
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public UserDTO(int id, string name)
+        {
+            this.Id = id;
+            this.Name = name;
+        }
     }
 }

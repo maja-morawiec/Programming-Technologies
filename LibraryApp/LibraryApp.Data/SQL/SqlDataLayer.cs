@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using LibraryApp.Data.API;
+using LibraryApp.Data.Implementation;
 
-namespace LibraryApp.Data 
+namespace LibraryApp.Data
 {
     public class SqlDataLayer : IDataLayer
     {
@@ -14,86 +15,167 @@ namespace LibraryApp.Data
             _context = new DataClasses1DataContext();
         }
 
-        public List<IUser> Users => _context.Users.Cast<IUser>().ToList();
+        // --- USERS ---
 
-        public Dictionary<int, IProduct> Catalog => _context.Products
-            .Cast<IProduct>()
-            .ToDictionary(p => p.Id);
-
-        public List<IEvent> Events => _context.Events.Cast<IEvent>().ToList();
-
-        public void AddUser(IUser user)
+        public override void AddUser(int id, string name)
         {
-            _context.Users.InsertOnSubmit((Users)user);
+            var entity = new Users
+            {
+                Id = id,
+                Name = name
+            };
+            _context.Users.InsertOnSubmit(entity);
         }
 
-        public void RemoveUser(int id)
+        public override void RemoveUser(int id)
         {
             var user = _context.Users.FirstOrDefault(u => u.Id == id);
             if (user != null)
-            {
                 _context.Users.DeleteOnSubmit(user);
-            }
         }
 
-        public void UpdateUser(IUser user)
+        public override void UpdateUser(int id, string name)
         {
-            var existing = _context.Users.FirstOrDefault(u => u.Id == user.Id);
-            if (existing != null)
+            var user = _context.Users.FirstOrDefault(u => u.Id == id);
+            if (user != null)
+                user.Name = name;
+        }
+
+        public override IUser GetUser(int id)
+        {
+            var user = _context.Users.FirstOrDefault(u => u.Id == id);
+            if (user == null)
+                return null;
+
+            return new Reader(user.Id, user.Name);
+        }
+
+        public override IEnumerable<IUser> GetAllUsers()
+        {
+            return _context.Users
+                .Select(u => new Reader(u.Id, u.Name))
+                .Cast<IUser>()
+                .ToList();
+        }
+
+        // --- PRODUCTS ---
+
+        public override void AddProduct(int id, string name, int quantity)
+        {
+            var entity = new Products
             {
-                existing.Name = user.Name;
-            }
+                Id = id,
+                Name = name,
+                Quantity = quantity
+            };
+            _context.Products.InsertOnSubmit(entity);
         }
 
-        public void AddProduct(IProduct product)
+        public override void RemoveProduct(int id)
         {
-            _context.Products.InsertOnSubmit((Products)product);
+            var product = _context.Products.FirstOrDefault(p => p.Id == id);
+            if (product != null)
+                _context.Products.DeleteOnSubmit(product);
         }
 
-        public void RemoveProduct(int id)
+        public override void UpdateProduct(int id, string name, int quantity)
         {
             var product = _context.Products.FirstOrDefault(p => p.Id == id);
             if (product != null)
             {
-                _context.Products.DeleteOnSubmit(product);
+                product.Name = name;
+                product.Quantity = quantity;
             }
         }
 
-        public void UpdateProduct(IProduct product)
+        public override IProduct GetProduct(int id)
         {
-            var existing = _context.Products.FirstOrDefault(p => p.Id == product.Id);
-            if (existing != null)
+            var product = _context.Products.FirstOrDefault(p => p.Id == id);
+            if (product == null)
+                return null;
+
+            // Bezpieczne rzutowanie z int? i obsługa nullable
+            int quantity = product.Quantity ?? 0;
+
+            return new Book(product.Id, product.Name, quantity);
+        }
+
+        public override IEnumerable<IProduct> GetAllProducts()
+        {
+            return _context.Products
+                .Select(p => new Book(p.Id, p.Name, p.Quantity ?? 0))
+                .Cast<IProduct>()
+                .ToList();
+        }
+
+        // --- EVENTS ---
+
+        public override void AddEvent(int id, string description, DateTime timestamp)
+        {
+            var entity = new Events
             {
-                existing.Name = product.Name;
-                existing.Quantity = product.Quantity;
-            }
+                Id = id,
+                Description = description,
+                Timestamp = timestamp
+            };
+            _context.Events.InsertOnSubmit(entity);
         }
 
-        public void AddEvent(IEvent evt)
+        public override void RemoveEvent(int id)
         {
-            _context.Events.InsertOnSubmit((Events)evt);
+            var ev = _context.Events.FirstOrDefault(e => e.Id == id);
+            if (ev != null)
+                _context.Events.DeleteOnSubmit(ev);
         }
 
-        public void RemoveEvent(int id)
+        public override void UpdateEvent(int id, string description, DateTime timestamp)
         {
             var ev = _context.Events.FirstOrDefault(e => e.Id == id);
             if (ev != null)
             {
-                _context.Events.DeleteOnSubmit(ev);
+                ev.Description = description;
+                ev.Timestamp = timestamp;
             }
         }
 
-        public void UpdateEvent(IEvent evt)
+        public override IEvent GetEvent(int id)
         {
-            var existing = _context.Events.FirstOrDefault(e => e.Id == evt.Id);
-            if (existing != null)
-            {
-                existing.Description = evt.Description;
-                existing.Timestamp = evt.Timestamp;
-            }
+            var ev = _context.Events.FirstOrDefault(e => e.Id == id);
+            if (ev == null)
+                return null;
+
+            // Bezpieczne rzutowanie DateTime? na DateTime
+            DateTime timestamp = ev.Timestamp ?? DateTime.MinValue;
+
+            return new BorrowEvent(ev.Id, ev.Description, timestamp);
         }
 
-        public void SaveChanges()
+        public override IEnumerable<IEvent> GetAllEvents()
+        {
+            return _context.Events
+                .Select(e => new BorrowEvent(e.Id, e.Description, e.Timestamp ?? DateTime.MinValue))
+                .Cast<IEvent>()
+                .ToList();
+        }
+
+        // --- BorrowProduct ---
+
+        public override void BorrowProduct(int productId)
+        {
+            var product = _context.Products.FirstOrDefault(p => p.Id == productId);
+            if (product == null)
+                throw new KeyNotFoundException("Product not found.");
+
+            int quantity = product.Quantity ?? 0;
+            if (quantity <= 0)
+                throw new InvalidOperationException("Product is out of stock.");
+
+            product.Quantity = quantity - 1;
+        }
+
+        // --- Save ---
+
+        public override void SaveChanges()
         {
             _context.SubmitChanges();
         }

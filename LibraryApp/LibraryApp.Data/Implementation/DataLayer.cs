@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using LibraryApp.Data.API;
@@ -10,82 +11,125 @@ namespace LibraryApp.Data.Implementation
 {
     internal class DataLayer : IDataLayer
     {
-        public List<IUser> Users { get; private set; }
-        public Dictionary<int, IProduct> Catalog { get; private set; }
-        public List<IEvent> Events { get; private set; }
+        private List<IUser> _users;
+        private Dictionary<int, IProduct> _catalog;
+        private List<IEvent> _events;
 
-        public DataLayer()
+        // --- USERS ---
+
+        public override void AddUser(int id, string name)
         {
-            Users = new List<IUser>();
-            Catalog = new Dictionary<int, IProduct>();
-            Events = new List<IEvent>();
+            _users.Add(new Reader (id, name));
         }
 
-        public void AddUser(IUser user)
+        public override void RemoveUser(int id)
         {
-            Users.Add(user);
+            _users.RemoveAll(u => u.Id == id);
         }
 
-        public void RemoveUser(int userId)
+        public override void UpdateUser(int id, string name)
         {
-            Users.RemoveAll(u => u.Id == userId);
-        }
-
-        public void UpdateUser(IUser user)
-        {
-            for (int i = 0; i < Users.Count; i++)
+            var user = _users.FirstOrDefault(u => u.Id == id);
+            if (user != null)
             {
-                if (Users[i].Id == user.Id)
+                user.Name = name;
+            }
+        }
+
+        public override IUser GetUser(int id)
+        {
+            return _users.FirstOrDefault(u => u.Id == id);
+        }
+
+        public override IEnumerable<IUser> GetAllUsers()
+        {
+            return _users;
+        }
+
+        // --- PRODUCTS ---
+
+        public override void AddProduct(int id, string name, int quantity)
+        {
+            _catalog[id] = new Book (id, name, quantity);
+        }
+
+        public override void RemoveProduct(int id)
+        {
+            _catalog.Remove(id);
+        }
+
+        public override void UpdateProduct(int id, string name, int quantity)
+        {
+            if (_catalog.TryGetValue(id, out var product) && product is Book book)
+            {
+                book.Name = name;
+                book.Quantity = quantity;
+            }
+        }
+
+        public override IProduct GetProduct(int id)
+        {
+            return _catalog.TryGetValue(id, out var product) ? product : null;
+        }
+
+        public override IEnumerable<IProduct> GetAllProducts()
+        {
+            return _catalog.Values;
+        }
+
+        // --- EVENTS ---
+
+        public override void AddEvent(int id, string description, DateTime timestamp)
+        {
+            _events.Add(new BorrowEvent (id, description, timestamp));
+        }
+
+        public override void RemoveEvent(int id)
+        {
+            _events.RemoveAll(e => e.Id == id);
+        }
+
+        public override void UpdateEvent(int id, string description, DateTime timestamp)
+        {
+            var evt = _events.FirstOrDefault(e => e.Id == id) as BorrowEvent;
+            if (evt != null)
+            {
+                evt.Description = description;
+                evt.Timestamp = timestamp;
+            }
+        }
+        public override IEvent GetEvent(int id)
+        {
+            return _events.FirstOrDefault(e => e.Id == id);
+        }
+
+        public override IEnumerable<IEvent> GetAllEvents()
+        {
+            return _events;
+        }
+
+        public override void SaveChanges()
+        {
+            // No-op for in-memory
+        }
+
+        public override void BorrowProduct(int productId)
+        {
+            if (_catalog.TryGetValue(productId, out var product) && product is Book book)
+            {
+                if (book.Quantity > 0)
                 {
-                    Users[i] = user;
-                    return;
+                    book.Quantity--;
+                }
+                else
+                {
+                    throw new InvalidOperationException("Product is out of stock.");
                 }
             }
-        }
-
-        public void AddProduct(IProduct product)
-        {
-            Catalog[product.Id] = product;
-        }
-
-        public void RemoveProduct(int productId)
-        {
-            Catalog.Remove(productId);
-        }
-
-        public void UpdateProduct(IProduct product)
-        {
-            if (Catalog.ContainsKey(product.Id))
+            else
             {
-                Catalog[product.Id] = product;
+                throw new KeyNotFoundException("Product not found.");
             }
-        }
-
-        public void AddEvent(IEvent evt)
-        {
-            Events.Add(evt);
-        }
-
-        public void RemoveEvent(int eventId)
-        {
-            Events.RemoveAll(e => e.Id == eventId);
-        }
-
-        public void UpdateEvent(IEvent evt)
-        {
-            for (int i = 0; i < Events.Count; i++)
-            {
-                if (Events[i].Id == evt.Id)
-                {
-                    Events[i] = evt;
-                    return;
-                }
-            }
-        }
-
-        public void SaveChanges()
-        {
-            
         }
     }
 }

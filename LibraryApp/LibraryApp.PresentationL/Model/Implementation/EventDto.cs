@@ -8,10 +8,18 @@ using LibraryApp.PresentationL.Model.API;
 
 namespace LibraryApp.PresentationL.Model.Implementation
 {
-    internal class EventDto : IEventDto
+    public class EventDto : IEventDto
     {
+        public EventDto(int id, string description, DateTime timestamp)
+        {
+            this.Id = id;
+            this.Description = description;
+            this.Timestamp = timestamp;
+        }
+
         public int Id { get; set; }
         public string Description { get; set; }
+        public DateTime Timestamp { get; set; }
     }
 }
 

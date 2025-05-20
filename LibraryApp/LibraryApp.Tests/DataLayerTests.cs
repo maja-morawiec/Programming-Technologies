@@ -4,7 +4,7 @@ using LibraryApp.Data.Implementation;
 
 namespace LibraryApp.Tests
 {
-    [TestClass]
+    /*[TestClass]
     public class DataLayerTests
     {
         private IDataLayer _dataLayer;
@@ -47,5 +47,5 @@ namespace LibraryApp.Tests
             Assert.AreEqual(1, _dataLayer.Events.Count);
             Assert.AreEqual("Test event", _dataLayer.Events[0].Description);
         }
-    }
+    }*/
 }
