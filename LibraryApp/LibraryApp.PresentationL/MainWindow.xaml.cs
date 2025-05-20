@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using LibraryApp.Logic;
+using LibraryApp.PresentationL.ViewModels;
 
 namespace LibraryApp.PresentationL
 {
@@ -23,6 +25,10 @@ namespace LibraryApp.PresentationL
         public MainWindow()
         {
             InitializeComponent();
+
+            /*IDataLayer data = new DataLayer(); // lub SqlDataLayer
+            IBusinessLogic logic = new BusinessLogic(data);
+            DataContext = new MainViewModel(logic);*/ //tu trzeba cos zmienic bo jeszcze nie dziala!!
         }
     }
 }

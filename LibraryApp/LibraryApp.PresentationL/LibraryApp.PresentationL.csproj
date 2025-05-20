@@ -60,6 +60,7 @@
     <Compile Include="Model\ProductDto.cs" />
     <Compile Include="Model\UserDto.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\ProductModel.cs" />
     <Compile Include="ViewModels\ProductsViewModel.cs" />
     <Compile Include="ViewModels\RelayCommand.cs" />
