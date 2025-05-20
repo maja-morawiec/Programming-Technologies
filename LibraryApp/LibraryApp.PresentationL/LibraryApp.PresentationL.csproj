@@ -55,10 +55,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Model\EventDto.cs" />
+    <Compile Include="Model\API\IUserDto.cs" />
+    <Compile Include="Model\API\IProductDto.cs" />
+    <Compile Include="Model\API\IEventDto.cs" />
+    <Compile Include="Model\Implementation\EventDto.cs" />
     <Compile Include="Model\LibraryModel.cs" />
-    <Compile Include="Model\ProductDto.cs" />
-    <Compile Include="Model\UserDto.cs" />
+    <Compile Include="Model\Implementation\ProductDto.cs" />
+    <Compile Include="Model\Implementation\UserDto.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\ProductModel.cs" />

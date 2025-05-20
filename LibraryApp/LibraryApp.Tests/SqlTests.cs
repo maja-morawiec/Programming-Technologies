@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using LibraryApp.Data.API;
-using LibraryApp.Data.Sql;
+using LibraryApp.Data;
 
 namespace LibraryApp.SqlTests
 {

@@ -4,11 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LibraryApp.PresentationL.Model
+using LibraryApp.PresentationL.Model.API;
+
+namespace LibraryApp.PresentationL.Model.Implementation
 {
-    class ProductDto
+    internal class UserDto : IUserDto
     {
         public int Id { get; set; }
         public string Name { get; set; }
     }
 }
+

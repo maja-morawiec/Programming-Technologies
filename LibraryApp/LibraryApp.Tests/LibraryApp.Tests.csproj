@@ -54,10 +54,6 @@
     <Compile Include="SqlTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LibraryApp.Data.Sql\LibraryApp.Data.Sql.csproj">
-      <Project>{ed98f5d1-9b1e-4d5c-988f-cb3cb80c9b4a}</Project>
-      <Name>LibraryApp.Data.Sql</Name>
-    </ProjectReference>
     <ProjectReference Include="..\LibraryApp.Data\LibraryApp.Data.csproj">
       <Project>{2bef8555-93c9-44fc-993f-ac9f8784575f}</Project>
       <Name>LibraryApp.Data</Name>

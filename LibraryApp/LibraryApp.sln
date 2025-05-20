@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryApp.Data", "LibraryA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryApp.Logic", "LibraryApp.Logic\LibraryApp.Logic.csproj", "{3A5D5469-F602-463B-A28C-D5385921CF15}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryApp.Data.Sql", "LibraryApp.Data.Sql\LibraryApp.Data.Sql.csproj", "{ED98F5D1-9B1E-4D5C-988F-CB3CB80C9B4A}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryApp.Tests", "LibraryApp.Tests\LibraryApp.Tests.csproj", "{CBC2ACF0-42A0-4FCE-8D09-CBF1DB10319E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryApp.PresentationL", "LibraryApp.PresentationL\LibraryApp.PresentationL.csproj", "{F762B73E-B8A9-45F9-B3C0-220FA837F700}"
@@ -27,10 +25,6 @@ Global
 		{3A5D5469-F602-463B-A28C-D5385921CF15}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3A5D5469-F602-463B-A28C-D5385921CF15}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3A5D5469-F602-463B-A28C-D5385921CF15}.Release|Any CPU.Build.0 = Release|Any CPU
-		{ED98F5D1-9B1E-4D5C-988F-CB3CB80C9B4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ED98F5D1-9B1E-4D5C-988F-CB3CB80C9B4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ED98F5D1-9B1E-4D5C-988F-CB3CB80C9B4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ED98F5D1-9B1E-4D5C-988F-CB3CB80C9B4A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CBC2ACF0-42A0-4FCE-8D09-CBF1DB10319E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CBC2ACF0-42A0-4FCE-8D09-CBF1DB10319E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CBC2ACF0-42A0-4FCE-8D09-CBF1DB10319E}.Release|Any CPU.ActiveCfg = Release|Any CPU
