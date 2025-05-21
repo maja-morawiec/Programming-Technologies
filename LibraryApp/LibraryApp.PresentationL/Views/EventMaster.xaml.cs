@@ -11,10 +11,13 @@ namespace LibraryApp.PresentationL.Views
 {
     public partial class EventMaster : UserControl
     {
-        public EventMaster(IModel model)
+        public EventMaster()
         {
             InitializeComponent();
-            DataContext = new VMEventList(model);
         }
+        /*public EventMaster(IModel model) : this()
+        {
+            DataContext = new VMEventList(model);
+        }*/
     }
 }

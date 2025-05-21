@@ -15,9 +15,23 @@ namespace LibraryApp.PresentationL.ViewModel
     internal class VMEventList : PropertyChange
     {
         private readonly IModel _model;
-
         private ObservableCollection<VMEvent> eventVMList;
         private VMEvent selectedVMEvent;
+
+        private int newEventId;
+        private string newEventDescription;
+
+        public int NewEventId
+        {
+            get => newEventId;
+            set => SetProperty(ref newEventId, value);
+        }
+
+        public string NewEventDescription
+        {
+            get => newEventDescription;
+            set => SetProperty(ref newEventDescription, value);
+        }
 
         public ObservableCollection<VMEvent> EventVMList
         {
@@ -39,47 +53,51 @@ namespace LibraryApp.PresentationL.ViewModel
         public VMEventList(IModel model)
         {
             _model = model ?? throw new ArgumentNullException(nameof(model));
-            EventVMList = new ObservableCollection<VMEvent>(); // <- to dodaj
-            RefreshCommand = new RelayCommand(async _ => await RefreshEvents());
-            AddCommand = new RelayCommand(_ => AddEvent());
-            RemoveCommand = new RelayCommand(_ => DeleteEvent(), _ => selectedVMEvent  != null);
-            UpdateCommand = new RelayCommand(_ => UpdateEvent(), _ => selectedVMEvent != null);
+            eventVMList = new ObservableCollection<VMEvent>();
+
+            RefreshCommand = new RelayCommand(_ => _ = RefreshEvents());
+            AddCommand = new RelayCommand(async _ => await AddEvent());
+            RemoveCommand = new RelayCommand(async _ => await DeleteEvent(), _ => SelectedVMEvent != null);
+            UpdateCommand = new RelayCommand(async _ => await UpdateEvent(), _ => SelectedVMEvent != null);
 
             _ = RefreshEvents();
         }
 
         private async Task RefreshEvents()
         {
-            // Jeśli masz async metodę modelu, możesz ją wywołać asynchronicznie
-            // Tutaj przykładowo zakładam synchroniczne GetAllEvents(), dostosuj jeśli trzeba
             var events = _model.GetAllEvents();
-
             EventVMList.Clear();
+
             foreach (var e in events)
             {
                 EventVMList.Add(new VMEvent(e.Id, e.Description, e.Timestamp));
             }
         }
 
-        private void AddEvent()
+        private async Task AddEvent()
         {
-            var newEvent = new VMEvent(0, "New Event", DateTime.Now);
-            _model.AddEvent(newEvent.Id, newEvent.Description, newEvent.Timestamp);
-            _ = RefreshEvents();
+            await _model.AddEvent(NewEventId, NewEventDescription, DateTime.Now);
+            await RefreshEvents();
+
+            // Czyść pola wejściowe
+            NewEventId = 0;
+            NewEventDescription = string.Empty;
         }
 
-        private void DeleteEvent()
+        private async Task DeleteEvent()
         {
-            if(selectedVMEvent != null)
-            {
-                EventVMList.Remove(selectedVMEvent);
-                SelectedVMEvent = EventVMList.Count > 0 ? EventVMList[0] : null;
-            }
+            if (SelectedVMEvent == null) return;
+
+            await _model.RemoveEvent(SelectedVMEvent.Id);
+            await RefreshEvents();
         }
 
-        private void UpdateEvent()
+        private async Task UpdateEvent()
         {
-            _model.UpdateEvent(selectedVMEvent.Id, selectedVMEvent.Description, selectedVMEvent.Timestamp);
+            if (SelectedVMEvent == null) return;
+
+            await _model.UpdateEvent(SelectedVMEvent.Id, SelectedVMEvent.Description, SelectedVMEvent.Timestamp);
+            await RefreshEvents();
         }
     }
 }
