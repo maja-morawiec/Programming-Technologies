@@ -34,5 +34,7 @@ namespace LibraryApp.PresentationL.ViewModel
             get => name;
             set => SetProperty(ref name, value);
         }
+
+        
     }
 }

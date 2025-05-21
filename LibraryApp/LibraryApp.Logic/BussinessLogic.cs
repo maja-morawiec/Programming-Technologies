@@ -93,6 +93,11 @@ namespace LibraryApp.Logic
         public override List<IEventDTO> GetAllEvents()
         {
             var dataEvents = _dataLayer.GetAllEvents();
+            if (dataEvents == null)
+            {
+                throw new InvalidOperationException("Metoda _dataLayer.GetAllEvents() zwróciła null!");
+            }
+
             var result = new List<IEventDTO>();
             foreach (var evt in dataEvents)
             {
@@ -100,6 +105,7 @@ namespace LibraryApp.Logic
             }
             return result;
         }
+
 
         // ----------- Business Logic ------------
 

@@ -34,6 +34,7 @@ namespace LibraryApp.PresentationL.ViewModel
         public VMEventList(IModel model)
         {
             _model = model ?? throw new ArgumentNullException(nameof(model));
+            EventVMList = new ObservableCollection<VMEvent>(); // <- to dodaj
             RefreshCommand = new RelayCommand(async _ => await RefreshEvents());
             _ = RefreshEvents();
         }
