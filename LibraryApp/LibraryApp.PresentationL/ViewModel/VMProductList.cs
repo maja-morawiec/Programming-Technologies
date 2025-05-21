@@ -17,12 +17,22 @@ namespace LibraryApp.PresentationL.ViewModel
         private VMProduct _selectedProduct;
 
         public ICommand RefreshCommand { get; }
+        public ICommand AddProductCommand { get; }
+        public ICommand DeleteProductCommand { get; }
+        public ICommand UpdateProductCommand { get; }
+
+
 
         public VMProductList()
         {
             _model = IModel.CreateNewModel();
             products = new ObservableCollection<VMProduct>();
             RefreshCommand = new RelayCommand(_ => GetProducts(), _ => true);
+            AddProductCommand = new RelayCommand(_ => AddProduct(), _ => true);
+            DeleteProductCommand = new RelayCommand(_ => DeleteProduct(), _ => SelectedProduct != null);
+            UpdateProductCommand = new RelayCommand(_ => UpdateProduct(), _ => SelectedProduct != null);
+            SelectedProduct = new VMProduct();
+
         }
 
         public VMProductList(IModel model)
@@ -66,5 +76,35 @@ namespace LibraryApp.PresentationL.ViewModel
             }
             OnPropertyChanged(nameof(Products));
         }
+
+        public void AddProduct()
+        {
+            if (SelectedProduct != null)
+            {
+                _model.AddProduct(SelectedProduct.Id, SelectedProduct.Name, SelectedProduct.Quantity);
+                GetProducts();
+            }
+        }
+
+
+        public void DeleteProduct()
+        {
+            if (SelectedProduct != null)
+            {
+                _model.RemoveProduct(SelectedProduct.Id);
+                GetProducts();
+            }
+        }
+
+        public void UpdateProduct()
+        {
+            if (SelectedProduct != null)
+            {
+                _model.UpdateProduct(SelectedProduct.Id, SelectedProduct.Name, SelectedProduct.Quantity);
+                GetProducts();
+            }
+        }
+
+
     }
 }

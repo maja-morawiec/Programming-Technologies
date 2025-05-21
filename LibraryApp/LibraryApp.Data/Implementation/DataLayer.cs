@@ -15,6 +15,12 @@ namespace LibraryApp.Data.Implementation
         private Dictionary<int, IProduct> _catalog;
         private List<IEvent> _events;
 
+        public DataLayer()
+        {
+            _users = new List<IUser>();
+            _catalog = new Dictionary<int, IProduct>();
+            _events = new List<IEvent>();
+        }
         // --- USERS ---
 
         public override void AddUser(int id, string name)

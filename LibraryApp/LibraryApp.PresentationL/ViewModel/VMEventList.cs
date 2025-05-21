@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using LibraryApp.PresentationL.Model.API;
 using LibraryApp.PresentationL.ViewModels;
 using System.Windows.Input;
+using System.ComponentModel;
+using System.Data.Odbc;
 
 namespace LibraryApp.PresentationL.ViewModel
 {
@@ -30,12 +32,19 @@ namespace LibraryApp.PresentationL.ViewModel
         }
 
         public ICommand RefreshCommand { get; }
+        public ICommand AddCommand { get; }
+        public ICommand RemoveCommand { get; }
+        public ICommand UpdateCommand { get; }
 
         public VMEventList(IModel model)
         {
             _model = model ?? throw new ArgumentNullException(nameof(model));
             EventVMList = new ObservableCollection<VMEvent>(); // <- to dodaj
             RefreshCommand = new RelayCommand(async _ => await RefreshEvents());
+            AddCommand = new RelayCommand(_ => AddEvent());
+            RemoveCommand = new RelayCommand(_ => DeleteEvent(), _ => selectedVMEvent  != null);
+            UpdateCommand = new RelayCommand(_ => UpdateEvent(), _ => selectedVMEvent != null);
+
             _ = RefreshEvents();
         }
 
@@ -50,6 +59,27 @@ namespace LibraryApp.PresentationL.ViewModel
             {
                 EventVMList.Add(new VMEvent(e.Id, e.Description, e.Timestamp));
             }
+        }
+
+        private void AddEvent()
+        {
+            var newEvent = new VMEvent(0, "New Event", DateTime.Now);
+            _model.AddEvent(newEvent.Id, newEvent.Description, newEvent.Timestamp);
+            _ = RefreshEvents();
+        }
+
+        private void DeleteEvent()
+        {
+            if(selectedVMEvent != null)
+            {
+                EventVMList.Remove(selectedVMEvent);
+                SelectedVMEvent = EventVMList.Count > 0 ? EventVMList[0] : null;
+            }
+        }
+
+        private void UpdateEvent()
+        {
+            _model.UpdateEvent(selectedVMEvent.Id, selectedVMEvent.Description, selectedVMEvent.Timestamp);
         }
     }
 }
