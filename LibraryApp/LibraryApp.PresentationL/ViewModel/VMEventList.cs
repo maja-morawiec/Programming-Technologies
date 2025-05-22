@@ -33,6 +33,11 @@ namespace LibraryApp.PresentationL.ViewModel
             set => SetProperty(ref newEventDescription, value);
         }
 
+        public ICommand RefreshCommand { get; }
+        public ICommand AddCommand { get; }
+        public ICommand RemoveCommand { get; }
+        public ICommand UpdateCommand { get; }
+
         public ObservableCollection<VMEvent> EventVMList
         {
             get => eventVMList;
@@ -45,22 +50,25 @@ namespace LibraryApp.PresentationL.ViewModel
             set => SetProperty(ref selectedVMEvent, value);
         }
 
-        public ICommand RefreshCommand { get; }
-        public ICommand AddCommand { get; }
-        public ICommand RemoveCommand { get; }
-        public ICommand UpdateCommand { get; }
-
-        public VMEventList(IModel model)
+        public VMEventList()
         {
-            _model = model ?? throw new ArgumentNullException(nameof(model));
+            _model = IModel.CreateNewModel();
             eventVMList = new ObservableCollection<VMEvent>();
+            RefreshCommand = new RelayCommand(_ => RefreshEvents(), _ => true);
 
-            RefreshCommand = new RelayCommand(_ => _ = RefreshEvents());
             AddCommand = new RelayCommand(async _ => await AddEvent());
             RemoveCommand = new RelayCommand(async _ => await DeleteEvent(), _ => SelectedVMEvent != null);
             UpdateCommand = new RelayCommand(async _ => await UpdateEvent(), _ => SelectedVMEvent != null);
 
-            _ = RefreshEvents();
+            RefreshEvents();
+        }
+
+        public VMEventList(IModel model)
+        {
+            //_ = RefreshEvents();
+            _model = model;
+            eventVMList = new ObservableCollection<VMEvent>();
+            RefreshCommand = new RelayCommand(_ => RefreshEvents(), _ => true);
         }
 
         private async Task RefreshEvents()

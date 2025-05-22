@@ -42,7 +42,7 @@
                 <TextBox Width="80" Text="{Binding NewUserId, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
 
                 <TextBlock VerticalAlignment="Center" Margin="5">New Name:</TextBlock>
-                <TextBox Width="150" Text="{Binding NewUserName, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
+                <TextBox Width="80" Text="{Binding NewUserName, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
 
                 <Button Content="Add" Command="{Binding AddUserCommand}" Margin="5"/>
                 <Button Content="Update" Command="{Binding UpdateUserCommand}" Margin="5"/>

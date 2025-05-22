@@ -14,7 +14,6 @@ namespace LibraryApp.PresentationL.ViewModel
     {
         private IModel _model;
         private ObservableCollection<VMUser> users;
-
         private VMUser _selectedUser;
 
         private int newUserId;
