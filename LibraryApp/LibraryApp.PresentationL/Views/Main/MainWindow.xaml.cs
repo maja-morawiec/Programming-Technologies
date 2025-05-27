@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using LibraryApp.Logic;
+using LibraryApp.Service;
 using LibraryApp.PresentationL.Model.API;
 using LibraryApp.PresentationL.Model.Implementation;
 using LibraryApp.PresentationL.ViewModels;

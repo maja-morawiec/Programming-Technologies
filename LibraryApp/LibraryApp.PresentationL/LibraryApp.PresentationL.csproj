@@ -148,9 +148,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LibraryApp.Logic\LibraryApp.Services.csproj">
+    <ProjectReference Include="..\LibraryApp.Logic\LibraryApp.Service.csproj">
       <Project>{3a5d5469-f602-463b-a28c-d5385921cf15}</Project>
-      <Name>LibraryApp.Services</Name>
+      <Name>LibraryApp.Service</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

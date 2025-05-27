@@ -51,11 +51,11 @@ namespace LibraryApp.Data.Implementation
 
         public IEnumerable<IUser> GetAllUsers()
         {
-            return _context.Users
-                .Select(u => new Reader(u.Id, u.Name))
-                .Cast<IUser>()
-                .ToList();
+            var query = from u in _context.Users
+                        select new Reader(u.Id, u.Name) as IUser;
+            return query.ToList();
         }
+
 
         // --- PRODUCTS ---
 

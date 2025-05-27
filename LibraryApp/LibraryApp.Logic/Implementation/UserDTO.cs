@@ -3,19 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LibraryApp.Service.API;
 
-namespace LibraryApp.Logic.DTO
+
+namespace LibraryApp.Service.Implementation
 {
-    class ProductDTO : IProductDTO
+    internal class UserDTO : IUserDTO
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public int Quantity { get; set; }
-        public ProductDTO(int id, string name, int quantity)
+
+        public UserDTO(int id, string name)
         {
             this.Id = id;
             this.Name = name;
-            this.Quantity = quantity;
         }
     }
 }

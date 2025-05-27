@@ -41,14 +41,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BussinessLogic.cs" />
-    <Compile Include="DTO\EventDTO.cs" />
-    <Compile Include="DTO\IEventDTO.cs" />
-    <Compile Include="DTO\IProductDTO.cs" />
-    <Compile Include="DTO\IUserDTO.cs" />
-    <Compile Include="DTO\ProductDTO.cs" />
-    <Compile Include="DTO\UserDTO.cs" />
-    <Compile Include="IBusinessLogic.cs" />
+    <Compile Include="Implementation\BussinessLogic.cs" />
+    <Compile Include="Implementation\EventDTO.cs" />
+    <Compile Include="API\IEventDTO.cs" />
+    <Compile Include="API\IProductDTO.cs" />
+    <Compile Include="API\IUserDTO.cs" />
+    <Compile Include="Implementation\ProductDTO.cs" />
+    <Compile Include="Implementation\UserDTO.cs" />
+    <Compile Include="API\IBusinessLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

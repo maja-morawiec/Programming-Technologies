@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LibraryApp.Service.API;
 
-namespace LibraryApp.Logic.DTO
+
+namespace LibraryApp.Service.Implementation
 {
-    class EventDTO : IEventDTO
+    internal class EventDTO : IEventDTO
     {
         public int Id { get; set; }
         public string Description { get; set; }
         public DateTime Timestamp { get; set; }
+
         public EventDTO(int id, string description, DateTime timestamp)
         {
             this.Id = id;
@@ -19,3 +22,4 @@ namespace LibraryApp.Logic.DTO
         }
     }
 }
+

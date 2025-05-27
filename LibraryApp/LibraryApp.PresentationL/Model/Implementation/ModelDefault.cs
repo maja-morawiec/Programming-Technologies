@@ -5,8 +5,9 @@ using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 using LibraryApp.PresentationL.Model.API;
-using LibraryApp.Logic;
-using LibraryApp.Logic.DTO;
+using LibraryApp.Service;
+using LibraryApp.Service.API;
+using LibraryApp.Service.Implementation;
 using System.Xml.Linq;
 using System.Runtime.CompilerServices;
 

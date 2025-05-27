@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using LibraryApp.Data.API;
-using LibraryApp.Logic.DTO;
+using LibraryApp.Service.API;
+using LibraryApp.Service.Implementation;
 
-namespace LibraryApp.Logic
+namespace LibraryApp.Service
 {
     public abstract class IBusinessLogic
     {

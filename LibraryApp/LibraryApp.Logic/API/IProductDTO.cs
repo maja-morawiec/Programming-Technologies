@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LibraryApp.Service.Implementation;
 
-namespace LibraryApp.Logic.DTO
+namespace LibraryApp.Service.API
 {
-    public interface IUserDTO
+    public interface IProductDTO
     {
         int Id { get; set; }
         string Name { get; set; }
+        int Quantity { get; set; }
     }
 }
