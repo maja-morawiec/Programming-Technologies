@@ -8,6 +8,10 @@ using LibraryApp.PresentationL.Model.API;
 using LibraryApp.Logic;
 using LibraryApp.Logic.DTO;
 using System.Xml.Linq;
+using System.Runtime.CompilerServices;
+
+[assembly: InternalsVisibleTo("LibraryApp.PresentationL.Test")]
+
 
 namespace LibraryApp.PresentationL.Model.Implementation
 {

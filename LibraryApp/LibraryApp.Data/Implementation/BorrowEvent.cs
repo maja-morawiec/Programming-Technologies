@@ -1,6 +1,7 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 using LibraryApp.Data.API;
-
+[assembly: InternalsVisibleTo("LibraryApp.Data.Test")]
 namespace LibraryApp.Data.Implementation
 {
     internal class BorrowEvent : IEvent

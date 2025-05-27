@@ -3,6 +3,7 @@ using System.Runtime.CompilerServices;
 using LibraryApp.Data.API;
 
 [assembly: InternalsVisibleTo("LibraryApp.Tests")]
+[assembly: InternalsVisibleTo("LibraryApp.Data.Test")]
 
 namespace LibraryApp.Data.Implementation
 {

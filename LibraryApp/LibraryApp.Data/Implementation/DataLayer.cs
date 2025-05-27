@@ -6,6 +6,7 @@ using LibraryApp.Data.API;
 
 [assembly: InternalsVisibleTo("LibraryApp.Tests")]
 [assembly: InternalsVisibleTo("LibraryApp.Logic")]
+[assembly: InternalsVisibleTo("LibraryApp.Data.Test")]
 
 namespace LibraryApp.Data.Implementation
 {

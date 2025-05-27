@@ -1,8 +1,11 @@
-﻿using System;
+﻿using System.Runtime.CompilerServices;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using LibraryApp.Data.API;
 using LibraryApp.Data.Implementation;
+
+[assembly: InternalsVisibleTo("LibraryApp.Data.Test")]
 
 namespace LibraryApp.Data.Implementation
 {
