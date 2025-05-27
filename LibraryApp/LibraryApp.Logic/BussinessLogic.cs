@@ -17,7 +17,7 @@ namespace LibraryApp.Logic
             _dataLayer = layer ?? IDataLayer.CreateDataLayer();
         }
 
-        // ----------- Users ------------
+        // ----------- Users ----------
 
         public async override Task AddUser(int id, string name)
         {
@@ -45,7 +45,7 @@ namespace LibraryApp.Logic
             return result;
         }
 
-        // ----------- Products ------------
+        // ----------- Products ----------
 
         public async override Task AddProduct(int id, string name, int quantity)
         {
