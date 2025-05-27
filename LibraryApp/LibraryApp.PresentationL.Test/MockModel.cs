@@ -1,6 +1,6 @@
 ﻿using LibraryApp.PresentationL.Model.API;
 using LibraryApp.PresentationL.Model.Implementation;
-using LibraryApp.Logic.DTO;
+using LibraryApp.Service;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
