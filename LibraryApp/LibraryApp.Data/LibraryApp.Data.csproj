@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API\ISqlDataLayer.cs" />
     <Compile Include="API\IDataGenerator.cs" />
     <Compile Include="API\IDataLayer.cs" />
     <Compile Include="API\IEvent.cs" />
@@ -63,7 +64,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LibraryData.dbml</DependentUpon>
     </Compile>
-    <Compile Include="SQL\SqlDataLayer.cs" />
+    <Compile Include="Implementation\SqlDataLayer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
