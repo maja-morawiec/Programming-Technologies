@@ -26,12 +26,26 @@ namespace LibraryApp.Data.Implementation
             _context.Users.InsertOnSubmit(entity);
         }
 
-        public void RemoveUser(int id)
+        /*public void RemoveUser(int id)
         {
             var user = _context.Users.FirstOrDefault(u => u.Id == id);
             if (user != null)
                 _context.Users.DeleteOnSubmit(user);
+        }*/
+
+        public void RemoveUser(int id) //new methos syntax
+        {
+            var user = _context.Users
+                               .Where<Users>(u => u.Id == id)
+                               .Select<Users, Users>(u => u)
+                               .FirstOrDefault();
+
+            if (user != null)
+            {
+                _context.Users.DeleteOnSubmit(user);
+            }
         }
+
 
         public void UpdateUser(int id, string name)
         {
